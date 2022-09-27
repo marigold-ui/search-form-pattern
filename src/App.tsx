@@ -7,7 +7,10 @@ import {
 //import theme from '@marigold/theme-unicorn';
 
 import Layout from './Layout/Layout';
-import { MarigoldThemeSwitch } from './components/ThemeMenuContext';
+import {
+  MarigoldThemeSwitch,
+  useThemeSwitch,
+} from './components/ThemeMenuContext';
 
 import unicornTheme from '@marigold/theme-unicorn';
 import b2bTheme from '@marigold/theme-b2b';
@@ -23,7 +26,7 @@ const themes = {
 
 function App() {
   return (
-    <MarigoldProvider theme={__defaultTheme}>
+    <MarigoldProvider theme={themes.unicornTheme}>
       <MarigoldThemeSwitch themes={themes}>
         <Box
           css={{
