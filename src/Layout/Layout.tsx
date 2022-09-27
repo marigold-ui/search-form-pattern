@@ -10,12 +10,8 @@ export const SearchContext = createContext({} as any);
 const Layout = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResult, setSearchResult] = useState('');
-
   const [resultDetail, setResultDetail] = useState('');
 
-  // console.log('searchQuery: ', searchQuery);
-  // console.log('searchResult', searchResult);
-  console.log('resultDetail', resultDetail);
   return (
     <SearchContext.Provider
       value={{
