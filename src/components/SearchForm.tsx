@@ -1,15 +1,21 @@
+import * as React from 'react';
 import { SetStateAction, useContext, useState } from 'react';
 import useSWR from 'swr';
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
 import { SearchContext } from '../Layout/Layout';
+import { useSearchParams } from 'react-router-dom';
 
 const SearchForm = () => {
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(searchParams);
+
   const { searchQuery, setSearchQuery, setSearchResult } =
     useContext(SearchContext);
 
   const fetcher: any = (url: RequestInfo | URL) =>
-    fetch(url).then((res) => res.json());
+    fetch(url).then(res => res.json());
 
   const { data, error } = useSWR(
     `https://swapi.dev/api/people/?search=${searchQuery}`,
@@ -18,12 +24,14 @@ const SearchForm = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // Use FormData to get the input values
-    const formData = new FormData(event.target as HTMLFormElement);
-    // Optionally, convert FormData into an object
-    const dataObject = Object.fromEntries(formData);
-    // console.log(dataObject);
-    event.target.reset();
+    // The serialize function here would be responsible for
+    // creating an object of { key: value } pairs from the
+    // fields in the form that make up the query.
+
+    console.log(event);
+    console.log(searchQuery);
+    // let params = serializeFormQuery(event.target);
+    setSearchParams(searchQuery);
   };
 
   const handleOnChange = (event: SetStateAction<string>) => {

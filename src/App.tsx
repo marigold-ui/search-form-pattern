@@ -3,17 +3,20 @@ import { Body, Box, Button, MarigoldProvider } from '@marigold/components';
 import theme from '@marigold/theme-unicorn';
 
 import Layout from './Layout/Layout';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <MarigoldProvider theme={theme}>
-      <Box
-        css={{
-          p: 'medium',
-        }}
-      >
-        <Layout />
-      </Box>
+      <BrowserRouter>
+        <Box
+          css={{
+            p: 'medium',
+          }}
+        >
+          <Layout />
+        </Box>
+      </BrowserRouter>
     </MarigoldProvider>
   );
 }
