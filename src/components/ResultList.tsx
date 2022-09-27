@@ -6,7 +6,6 @@ import { SearchContext } from '../Layout/Layout';
 const ResultList = () => {
   const { searchResult, setResultDetail } = useContext(SearchContext);
 
-  // console.log('searchResult', searchResult?.results);
   const onPressHandler = (item: any) => {
     setResultDetail(item);
   };

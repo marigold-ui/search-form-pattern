@@ -6,7 +6,6 @@ export interface CardListProps {
 }
 
 const CardList = ({ headline, data }: CardListProps) => {
-  console.log(data);
   if (data?.length != 0) {
     return (
       <>

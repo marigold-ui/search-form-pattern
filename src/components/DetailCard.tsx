@@ -74,6 +74,8 @@ const DetailCard = () => {
         </Body>
       </Card>
     );
+  } else {
+    return null;
   }
 };
 

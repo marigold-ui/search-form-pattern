@@ -5,11 +5,10 @@ import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
 import { SearchContext } from '../Layout/Layout';
 import { useSearchParams } from 'react-router-dom';
+import { useSearchParam } from 'react-use';
 
 const SearchForm = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
-
-  console.log(searchParams);
+  //let [searchParams, setSearchParams] = useSearchParams();
 
   const { searchQuery, setSearchQuery, setSearchResult } =
     useContext(SearchContext);
@@ -22,16 +21,17 @@ const SearchForm = () => {
     fetcher
   );
 
+  useSearchParam(searchQuery);
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     // The serialize function here would be responsible for
     // creating an object of { key: value } pairs from the
     // fields in the form that make up the query.
+    history.pushState(data, '', location.pathname + '?search=' + searchQuery);
 
-    console.log(event);
-    console.log(searchQuery);
-    // let params = serializeFormQuery(event.target);
-    setSearchParams(searchQuery);
+    //let params = serializeFormQuery(event.target);
+    // setSearchParams(searchQuery);
   };
 
   const handleOnChange = (event: SetStateAction<string>) => {
