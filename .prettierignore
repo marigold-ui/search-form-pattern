@@ -1,0 +1,16 @@
+.all-contributorsrc
+.changeset
+.DS_Store
+.env.local
+.eslintignore
+.gitignore
+.prettierignore
+
+LICENSE
+
+dist
+coverage
+
+docs/.cache
+docs/public/render-page.js.map
+*.png
