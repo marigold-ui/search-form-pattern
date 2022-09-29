@@ -4,31 +4,28 @@ import { Box, MarigoldProvider } from '@marigold/components';
 import Layout from './Layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
 import {
-  AppThemeProvider,
-  useThemeSwitch,
-} from './components/ThemeMenuContext';
+  ActiveThemeProvider,
+  ActiveThemeConsumer,
+} from './components/ActiveThemeProvider';
 
-const App = () => {
-  const { current, themes } = useThemeSwitch();
-  return (
-    <MarigoldProvider theme={themes[current]}>
-      <BrowserRouter>
-        <Box
-          css={{
-            p: 'medium',
-          }}
-        >
-          <Layout />
-        </Box>
-      </BrowserRouter>
-    </MarigoldProvider>
-  );
-};
-
-const AppWithWrapper = () => (
-  <AppThemeProvider>
-    <App />
-  </AppThemeProvider>
+const App = () => (
+  <ActiveThemeProvider>
+    <ActiveThemeConsumer>
+      {({ themes, current }) => (
+        <MarigoldProvider theme={themes[current]}>
+          <BrowserRouter>
+            <Box
+              css={{
+                p: 'medium',
+              }}
+            >
+              <Layout />
+            </Box>
+          </BrowserRouter>
+        </MarigoldProvider>
+      )}
+    </ActiveThemeConsumer>
+  </ActiveThemeProvider>
 );
 
-export default AppWithWrapper;
+export default App;
