@@ -14,15 +14,17 @@ export type ThemeNames = keyof typeof themes;
 
 // Context
 // ---------------
-export const Context = React.createContext({
+const Context = React.createContext({
   current: 'b2bTheme' as ThemeNames,
   themes,
-  setCurrentTheme: (names: ThemeNames) => {},
+  setActiveTheme: (_: ThemeNames) => {},
 });
+
+export const ActiveThemeConsumer = Context.Consumer;
 
 // Hook
 // ---------------
-export const useThemeSwitch = () => useContext(Context);
+export const useActiveTheme = () => useContext(Context);
 
 // Component
 // ---------------
@@ -30,11 +32,11 @@ export interface MarigoldThemeSwitchProps {
   children?: ReactNode;
 }
 
-export const AppThemeProvider = ({ children }: MarigoldThemeSwitchProps) => {
-  const [current, setCurrentTheme] = useState<ThemeNames>('b2bTheme');
+export const ActiveThemeProvider = ({ children }: MarigoldThemeSwitchProps) => {
+  const [current, setActiveTheme] = useState<ThemeNames>('b2bTheme');
 
   return (
-    <Context.Provider value={{ current, themes, setCurrentTheme }}>
+    <Context.Provider value={{ current, themes, setActiveTheme }}>
       {children}
     </Context.Provider>
   );

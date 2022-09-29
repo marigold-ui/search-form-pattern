@@ -7,10 +7,10 @@ import {
   Button,
   Text,
 } from '@marigold/components';
-import { ThemeNames, useThemeSwitch } from './ThemeMenuContext';
+import { ThemeNames, useActiveTheme } from './ActiveThemeProvider';
 
 const Navigation = () => {
-  const { current, themes, setCurrentTheme } = useThemeSwitch();
+  const { current, themes, setActiveTheme: setCurrentTheme } = useActiveTheme();
 
   return (
     <nav>
