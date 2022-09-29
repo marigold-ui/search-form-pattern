@@ -7,21 +7,24 @@ import {
   ActiveThemeProvider,
   ActiveThemeConsumer,
 } from './components/ActiveThemeProvider';
+import { StarWarsStoreProvider } from './hooks/useStarWarsStore';
 
 const App = () => (
   <ActiveThemeProvider>
     <ActiveThemeConsumer>
       {({ themes, current }) => (
         <MarigoldProvider theme={themes[current]}>
-          <BrowserRouter>
-            <Box
-              css={{
-                p: 'medium',
-              }}
-            >
-              <Layout />
-            </Box>
-          </BrowserRouter>
+          <StarWarsStoreProvider>
+            <BrowserRouter>
+              <Box
+                css={{
+                  p: 'medium',
+                }}
+              >
+                <Layout />
+              </Box>
+            </BrowserRouter>
+          </StarWarsStoreProvider>
         </MarigoldProvider>
       )}
     </ActiveThemeConsumer>

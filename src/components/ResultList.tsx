@@ -1,10 +1,13 @@
 import { Button, Table } from '@marigold/components';
 import { Eye } from '@marigold/icons';
 import { useContext } from 'react';
+import { useStarWarsStore } from '../hooks/useStarWarsStore';
 import { SearchContext } from '../Layout/Layout';
 
 const ResultList = () => {
   const { searchResult, setResultDetail } = useContext(SearchContext);
+
+  const { people } = useStarWarsStore();
 
   const onPressHandler = (item: any) => {
     setResultDetail(item);
@@ -18,7 +21,7 @@ const ResultList = () => {
         <Table.Column>Homeworld</Table.Column>
       </Table.Header>
       <Table.Body>
-        {searchResult?.results?.map((item: any) => (
+        {people.map((item: any) => (
           <Table.Row key={item.name}>
             <Table.Cell>
               <Button

@@ -6,8 +6,50 @@ import { Search } from '@marigold/icons';
 import { SearchContext } from '../Layout/Layout';
 import { useSearchParams } from 'react-router-dom';
 import { useSearchParam } from 'react-use';
+import { useStarWarsSearch } from '../hooks/useStarWarsSearch';
+import { useStarWarsStore } from '../hooks/useStarWarsStore';
 
 const SearchForm = () => {
+  const [query, setQuery] = useState('');
+  const { state, result } = useStarWarsSearch({ query });
+  const { setPeople } = useStarWarsStore();
+
+  React.useEffect(() => {
+    if (state === 'success') {
+      setPeople(result);
+    }
+  }, [state, result]);
+
+  const handleSearch = (val: string) => {
+    setQuery(val);
+  };
+
+  return (
+    <form>
+      <Inline space="small">
+        <TextField
+          type="search"
+          label="Search"
+          description="Type in what you are looking for!"
+          placeholder="Search..."
+          name="search"
+          autoComplete="off"
+          width="huge"
+          value={query}
+          onChange={handleSearch}
+        />
+        <Button variant="primary" size="small" type="submit">
+          <Search /> Search
+        </Button>
+      </Inline>
+    </form>
+  );
+};
+
+export default SearchForm;
+
+/**
+ 
   //let [searchParams, setSearchParams] = useSearchParams();
 
   const { searchQuery, setSearchQuery, setSearchResult } =
@@ -37,29 +79,12 @@ const SearchForm = () => {
 
   const handleOnChange = (event: SetStateAction<string>) => {
     setSearchQuery(event);
+    console.log(data && data.results);
     if (data) {
       setSearchResult(data);
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <Inline space="small">
-        <TextField
-          label="Search"
-          description="Type in what you are looking for!"
-          placeholder="Search..."
-          name="search"
-          width="huge"
-          value={searchQuery}
-          onChange={handleOnChange}
-        />
-        <Button variant="primary" size="small" type="submit">
-          <Search /> Search
-        </Button>
-      </Inline>
-    </form>
-  );
-};
 
-export default SearchForm;
+
+ */
