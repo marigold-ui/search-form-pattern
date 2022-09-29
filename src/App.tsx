@@ -1,13 +1,17 @@
-import React from 'react';
-import { Body, Box, Button, MarigoldProvider } from '@marigold/components';
-import theme from '@marigold/theme-unicorn';
+import { Box, MarigoldProvider } from '@marigold/components';
+//import theme from '@marigold/theme-unicorn';
 
 import Layout from './Layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
+import {
+  AppThemeProvider,
+  useThemeSwitch,
+} from './components/ThemeMenuContext';
 
-function App() {
+const App = () => {
+  const { current, themes } = useThemeSwitch();
   return (
-    <MarigoldProvider theme={theme}>
+    <MarigoldProvider theme={themes[current]}>
       <BrowserRouter>
         <Box
           css={{
@@ -19,6 +23,12 @@ function App() {
       </BrowserRouter>
     </MarigoldProvider>
   );
-}
+};
 
-export default App;
+const AppWithWrapper = () => (
+  <AppThemeProvider>
+    <App />
+  </AppThemeProvider>
+);
+
+export default AppWithWrapper;

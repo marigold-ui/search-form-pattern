@@ -14,7 +14,6 @@ import CardList from './CardList';
 
 const DetailCard = () => {
   const { resultDetail } = useContext(SearchContext);
-  console.log(resultDetail);
 
   /**
    * To Do's

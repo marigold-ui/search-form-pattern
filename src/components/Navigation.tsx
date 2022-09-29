@@ -1,8 +1,16 @@
-import { useState } from 'react';
-import { Inline, Image, Link, Split, Menu, Button } from '@marigold/components';
+import {
+  Inline,
+  Image,
+  Link,
+  Split,
+  Menu,
+  Button,
+  Text,
+} from '@marigold/components';
+import { ThemeNames, useThemeSwitch } from './ThemeMenuContext';
 
 const Navigation = () => {
-  const [selected, setSelected] = useState<string | number>('');
+  const { current, themes, setCurrentTheme } = useThemeSwitch();
 
   return (
     <nav>
@@ -17,13 +25,13 @@ const Navigation = () => {
           <Button variant="menu" size="small">
             Choose Menu
           </Button>
-          <Menu onSelect={setSelected}>
-            <Menu.Item key="burger">🍔 Burger</Menu.Item>
-            <Menu.Item key="pizza">🍕 Pizza</Menu.Item>
-            <Menu.Item key="salad">🥗 Salad</Menu.Item>
-            <Menu.Item key="fries">🍟 Fries</Menu.Item>
+          <Menu onSelect={current => setCurrentTheme(current as ThemeNames)}>
+            {Object.keys(themes).map(name => (
+              <Menu.Item key={name}>{name}</Menu.Item>
+            ))}
           </Menu>
         </Menu.Trigger>
+        <Text>{current}</Text>
       </Inline>
     </nav>
   );
