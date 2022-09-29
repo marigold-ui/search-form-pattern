@@ -1,18 +1,24 @@
 import React, { useState, useContext, ReactNode } from 'react';
-import { type Theme } from '@marigold/components';
+
+import unicornTheme from '@marigold/theme-unicorn';
+import b2bTheme from '@marigold/theme-b2b';
+import coreTheme from '@marigold/theme-core';
+
+const themes = {
+  unicornTheme,
+  b2bTheme,
+  coreTheme,
+} as const;
+
+export type ThemeNames = keyof typeof themes;
 
 // Context
 // ---------------
-export interface ThemeSwitchContextType {
-  current: string | undefined;
-  themes: { [name: string]: Theme };
-  setTheme: Function;
-}
-
 export const Context = React.createContext({
-  current: undefined,
-  themes: {},
-} as ThemeSwitchContextType);
+  current: 'b2bTheme' as ThemeNames,
+  themes,
+  setCurrentTheme: (names: ThemeNames) => {},
+});
 
 // Hook
 // ---------------
@@ -22,19 +28,13 @@ export const useThemeSwitch = () => useContext(Context);
 // ---------------
 export interface MarigoldThemeSwitchProps {
   children?: ReactNode;
-  themes: { [name: string]: Theme };
-  initial?: string;
 }
 
-export const MarigoldThemeSwitch = ({
-  themes,
-  initial,
-  children,
-}: MarigoldThemeSwitchProps) => {
-  const [theme, setTheme] = useState(initial);
+export const AppThemeProvider = ({ children }: MarigoldThemeSwitchProps) => {
+  const [current, setCurrentTheme] = useState<ThemeNames>('b2bTheme');
 
   return (
-    <Context.Provider value={{ current: theme, themes, setTheme }}>
+    <Context.Provider value={{ current, themes, setCurrentTheme }}>
       {children}
     </Context.Provider>
   );

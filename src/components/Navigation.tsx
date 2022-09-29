@@ -7,10 +7,10 @@ import {
   Button,
   Text,
 } from '@marigold/components';
-import { useThemeSwitch } from './ThemeMenuContext';
+import { ThemeNames, useThemeSwitch } from './ThemeMenuContext';
 
 const Navigation = () => {
-  const { current, themes, setTheme } = useThemeSwitch();
+  const { current, themes, setCurrentTheme } = useThemeSwitch();
 
   return (
     <nav>
@@ -25,7 +25,7 @@ const Navigation = () => {
           <Button variant="menu" size="small">
             Choose Menu
           </Button>
-          <Menu onSelect={current => setTheme(current)}>
+          <Menu onSelect={current => setCurrentTheme(current as ThemeNames)}>
             {Object.keys(themes).map(name => (
               <Menu.Item key={name}>{name}</Menu.Item>
             ))}
