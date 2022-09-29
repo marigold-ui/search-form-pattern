@@ -32,11 +32,14 @@ const SearchForm = () => {
 
     //let params = serializeFormQuery(event.target);
     // setSearchParams(searchQuery);
+    //event.target.reset();
   };
 
   const handleOnChange = (event: SetStateAction<string>) => {
     setSearchQuery(event);
-    setSearchResult(data);
+    if (data) {
+      setSearchResult(data);
+    }
   };
 
   return (
