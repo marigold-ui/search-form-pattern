@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { SetStateAction, useContext, useState } from 'react';
+import { SetStateAction, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
@@ -14,7 +13,7 @@ const SearchForm = () => {
   const { state, result } = useStarWarsSearch({ query });
   const { setPeople } = useStarWarsStore();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (state === 'success') {
       setPeople(result);
     }

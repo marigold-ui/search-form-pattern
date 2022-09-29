@@ -33,7 +33,7 @@ const ResultList = () => {
               </Button>
             </Table.Cell>
             <Table.Cell>{item.name}</Table.Cell>
-            <Table.Cell>{item.homeworld}</Table.Cell>
+            <Table.Cell>{item?.homeworld?.name}</Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

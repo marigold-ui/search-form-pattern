@@ -60,7 +60,9 @@ const DetailCard = () => {
                 <List.Item>Eye Color: {resultDetail?.eye_color}</List.Item>
                 <List.Item>Hair Color: {resultDetail?.hair_color}</List.Item>
                 <List.Item>Skin Color: {resultDetail?.skin_color}</List.Item>
-                <List.Item>Homeworld: {resultDetail?.homeworld}</List.Item>
+                <List.Item>
+                  Homeworld: {resultDetail?.homeworld?.name}
+                </List.Item>
               </List>
               <CardList headline={'Filme'} data={resultDetail?.films} />
               <CardList headline={'Fahrzeuge'} data={resultDetail?.vehicles} />

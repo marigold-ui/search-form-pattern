@@ -1,24 +1,57 @@
 import useSWR from 'swr';
+import { People, Planet } from './useStarWarsStore';
+
+const fetcher = async ({ type = 'people', query }: any) => {
+  let result;
+
+  try {
+    const response = await fetch(
+      `https://swapi.dev/api/${type}/?search=${query}`
+    );
+    result = await response.json().then(json => json.results);
+
+    if (type === 'people') {
+      result = await Promise.all(
+        result.map(async (p: any) => {
+          const homeworld = await fetch(p.homeworld).then(res => res.json());
+          return {
+            ...p,
+            homeworld,
+          };
+        })
+      );
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return result;
+};
 
 // Search
-export interface UseStarWarsSearchProps {
-  type?: 'planets' | 'spaceships' | 'vehicles' | 'people' | 'films' | 'species';
+export interface ResultTypes {
+  people: People[];
+  planets: Planet[];
+}
+
+export interface UseStarWarsSearchProps<T extends keyof ResultTypes> {
+  type?: T;
   query: string;
 }
 
-export type SearchState = 'idle' | 'loading' | 'sucess' | 'error';
+export interface SearchResult<T extends keyof ResultTypes> {
+  state: 'idle' | 'loading' | 'success' | 'error';
+  error: Error; // MAYBE?
+  result: ResultTypes[T];
+}
 
-const fetcher = (url: RequestInfo | URL) => fetch(url).then(res => res.json());
-
-export const useStarWarsSearch = ({ query }: UseStarWarsSearchProps) => {
-  const { data, error } = useSWR(
-    `https://swapi.dev/api/people/?search=${query}`,
-    fetcher
-  );
+export const useStarWarsSearch = <T extends keyof ResultTypes = 'people'>({
+  type,
+  query,
+}: UseStarWarsSearchProps<T>): SearchResult<T> => {
+  const { data, error } = useSWR({ type: type || 'people', query }, fetcher);
 
   const loading = !error && !data;
-  const result = data && data.results;
-
   const state = error
     ? 'error'
     : loading
@@ -27,5 +60,5 @@ export const useStarWarsSearch = ({ query }: UseStarWarsSearchProps) => {
     ? 'success'
     : 'idle';
 
-  return { state, error, result };
+  return { state, error, result: data };
 };

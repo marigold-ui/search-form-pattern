@@ -1,5 +1,22 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 
+export interface Planet {
+  name: string;
+  rotation_period: string;
+  orbital_period: string;
+  diameter: string;
+  climate: string;
+  gravity: string;
+  terrain: string;
+  surface_water: string;
+  population: string;
+  residents: string[];
+  films: string[];
+  created: Date;
+  edited: Date;
+  url: string;
+}
+
 export interface People {
   name: string;
   height: string;
@@ -9,7 +26,7 @@ export interface People {
   eye_color: string;
   birth_year: string;
   gender: string;
-  homeworld: string;
+  homeworld: Planet;
   films: string[];
   species: any[];
   vehicles: string[];
