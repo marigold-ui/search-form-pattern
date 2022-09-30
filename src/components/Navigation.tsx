@@ -7,7 +7,7 @@ import {
   Button,
   Text,
 } from '@marigold/components';
-import { ThemeNames, useActiveTheme } from './ActiveThemeProvider';
+import { ThemeNames, useActiveTheme } from './provider/ActiveThemeProvider';
 
 const Navigation = () => {
   const { current, themes, setActiveTheme: setCurrentTheme } = useActiveTheme();
@@ -15,12 +15,10 @@ const Navigation = () => {
   return (
     <nav>
       <Inline space="small">
-        <Image src="/sw.png" alt="Star Wars Logo" height={60} />
+        <Image src="src/assets/sw.png" alt="Star Wars Logo" height={60} />
         <Link href="#">Home</Link>
         <Link href="https://swapi.dev">About</Link>
-
         <Split />
-
         <Menu.Trigger>
           <Button variant="menu" size="small">
             Choose Menu

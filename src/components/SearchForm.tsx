@@ -1,7 +1,8 @@
 import { FormEventHandler, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
-import { useSearchParams } from 'react-router-dom';
 import { useStarWarsSearch } from '../hooks/useStarWarsSearch';
 import { useStarWarsStore } from '../hooks/useStarWarsStore';
 
@@ -22,8 +23,6 @@ const SearchForm = () => {
     ev.preventDefault();
     const data = new FormData(ev.target as HTMLFormElement);
     const search = (data.get('search') as string) || '';
-    // const json = Object.fromEntries(data) as { search: string };
-    // history.pushState(json, '', location.pathname + '?search=' + json.search);
     setQuery(search);
     setSearchParams({ search });
   };
@@ -50,44 +49,3 @@ const SearchForm = () => {
 };
 
 export default SearchForm;
-
-/**
- 
-  //let [searchParams, setSearchParams] = useSearchParams();
-
-  const { searchQuery, setSearchQuery, setSearchResult } =
-    useContext(SearchContext);
-
-  const fetcher: any = (url: RequestInfo | URL) =>
-    fetch(url).then(res => res.json());
-
-  const { data, error } = useSWR(
-    `https://swapi.dev/api/people/?search=${searchQuery}`,
-    fetcher
-  );
-
-  useSearchParam(searchQuery);
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    // The serialize function here would be responsible for
-    // creating an object of { key: value } pairs from the
-    // fields in the form that make up the query.
-    history.pushState(data, '', location.pathname + '?search=' + searchQuery);
-
-    //let params = serializeFormQuery(event.target);
-    // setSearchParams(searchQuery);
-    //event.target.reset();
-  };
-
-  const handleOnChange = (event: SetStateAction<string>) => {
-    setSearchQuery(event);
-    console.log(data && data.results);
-    if (data) {
-      setSearchResult(data);
-    }
-  };
-
-
-
- */

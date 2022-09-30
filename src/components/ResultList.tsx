@@ -2,10 +2,10 @@ import { Button, Table } from '@marigold/components';
 import { Eye } from '@marigold/icons';
 import { useContext } from 'react';
 import { useStarWarsStore } from '../hooks/useStarWarsStore';
-import { SearchContext } from '../Layout/Layout';
+import { SearchContext } from './provider/SearchContextProvider';
 
 const ResultList = () => {
-  const { setResultDetail } = useContext(SearchContext);
+  const { resultDetail, setResultDetail } = useContext(SearchContext);
 
   const { people } = useStarWarsStore();
 
