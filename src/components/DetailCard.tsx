@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
   Card,
   Header,
@@ -8,34 +9,12 @@ import {
   List,
   Stack,
 } from '@marigold/components';
-import { useContext } from 'react';
-import { SearchContext } from '../Layout/Layout';
-import CardList from './CardList';
 
-const DetailCard = () => {
+import { CardList } from './CardList';
+import { SearchContext } from './provider';
+
+export const DetailCard = () => {
   const { resultDetail } = useContext(SearchContext);
-
-  /**
-   * To Do's
-   *
-   * Headline -> Name
-   * Subheadline -> Geburtstag
-   *
-   * If Human -> Show gender informationen
-   *
-   * If Android -> Show species information
-   *
-   * As List
-   *  - eye color
-   *  - height
-   *  - mass
-   *  - skin color
-   *  - gender / species
-   *
-   *
-   * Films, Planet, Starship, vehicels
-   *
-   */
 
   if (resultDetail) {
     return (

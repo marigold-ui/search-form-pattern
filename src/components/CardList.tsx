@@ -5,7 +5,7 @@ export interface CardListProps {
   data: any;
 }
 
-const CardList = ({ headline, data }: CardListProps) => {
+export const CardList = ({ headline, data }: CardListProps) => {
   if (data?.length != 0) {
     return (
       <>
@@ -21,5 +21,3 @@ const CardList = ({ headline, data }: CardListProps) => {
     return null;
   }
 };
-
-export default CardList;

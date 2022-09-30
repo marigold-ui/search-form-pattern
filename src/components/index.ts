@@ -3,4 +3,5 @@ export * from './DetailCard';
 export * from './Navigation';
 export * from './ResultList';
 export * from './SearchForm';
-export * from './ActiveThemeProvider';
+export * from './layout';
+export * from './provider';
