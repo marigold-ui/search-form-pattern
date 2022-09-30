@@ -2,12 +2,13 @@ import { FormEventHandler, useEffect, useState } from 'react';
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
 import { useSearchParams } from 'react-router-dom';
-import { useSearchParam } from 'react-use';
 import { useStarWarsSearch } from '../hooks/useStarWarsSearch';
 import { useStarWarsStore } from '../hooks/useStarWarsStore';
 
 const SearchForm = () => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [query, setQuery] = useState(searchParams.get('search') || '');
   const { state, result } = useStarWarsSearch({ query });
   const { setPeople } = useStarWarsStore();
 
@@ -20,8 +21,11 @@ const SearchForm = () => {
   const handleSearch: FormEventHandler<HTMLFormElement> = ev => {
     ev.preventDefault();
     const data = new FormData(ev.target as HTMLFormElement);
-    const json = Object.fromEntries(data) as { search: string };
-    setQuery(json.search);
+    const search = (data.get('search') as string) || '';
+    // const json = Object.fromEntries(data) as { search: string };
+    // history.pushState(json, '', location.pathname + '?search=' + json.search);
+    setQuery(search);
+    setSearchParams({ search });
   };
 
   return (
@@ -35,6 +39,7 @@ const SearchForm = () => {
           name="search"
           autoComplete="off"
           width="huge"
+          defaultValue={query}
         />
         <Button variant="primary" size="small" type="submit">
           <Search /> Search

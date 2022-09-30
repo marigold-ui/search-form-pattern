@@ -5,7 +5,7 @@ import { useStarWarsStore } from '../hooks/useStarWarsStore';
 import { SearchContext } from '../Layout/Layout';
 
 const ResultList = () => {
-  const { searchResult, setResultDetail } = useContext(SearchContext);
+  const { setResultDetail } = useContext(SearchContext);
 
   const { people } = useStarWarsStore();
 
