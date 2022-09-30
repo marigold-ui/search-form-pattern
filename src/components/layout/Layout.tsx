@@ -1,12 +1,13 @@
 import { Aside, Box, Stack } from '@marigold/components';
-import { createContext } from 'react';
+
 import SearchForm from '../SearchForm';
 import Navigation from '../Navigation';
 import ResultList from '../ResultList';
 import DetailCard from '../DetailCard';
-import { SearchContextProvider } from '../provider/SearchContextProvider';
 
-const Layout = () => {
+import { SearchContextProvider } from '../provider';
+
+export const Layout = () => {
   return (
     <SearchContextProvider>
       <Box id="#search-example">
@@ -22,5 +23,3 @@ const Layout = () => {
     </SearchContextProvider>
   );
 };
-
-export default Layout;

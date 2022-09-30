@@ -1,11 +1,13 @@
+import { useContext } from 'react';
+
 import { Button, Table } from '@marigold/components';
 import { Eye } from '@marigold/icons';
-import { useContext } from 'react';
-import { useStarWarsStore } from '../hooks/useStarWarsStore';
-import { SearchContext } from './provider/SearchContextProvider';
+
+import { useStarWarsStore } from '../hooks';
+import { SearchContext } from './provider';
 
 const ResultList = () => {
-  const { resultDetail, setResultDetail } = useContext(SearchContext);
+  const { setResultDetail } = useContext(SearchContext);
 
   const { people } = useStarWarsStore();
 

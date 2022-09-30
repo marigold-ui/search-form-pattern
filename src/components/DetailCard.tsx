@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
   Card,
   Header,
@@ -8,9 +9,9 @@ import {
   List,
   Stack,
 } from '@marigold/components';
-import { useContext } from 'react';
-import CardList from './CardList';
-import { SearchContext } from './provider/SearchContextProvider';
+
+import { CardList } from './CardList';
+import { SearchContext } from './provider';
 
 const DetailCard = () => {
   const { resultDetail } = useContext(SearchContext);

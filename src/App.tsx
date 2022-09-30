@@ -1,12 +1,8 @@
 import { Box, MarigoldProvider } from '@marigold/components';
-
-import Layout from './components/layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
-import {
-  ActiveThemeProvider,
-  ActiveThemeConsumer,
-} from './components/provider/ActiveThemeProvider';
-import { StarWarsStoreProvider } from './hooks/useStarWarsStore';
+
+import { ActiveThemeProvider, ActiveThemeConsumer, Layout } from './components';
+import { StarWarsStoreProvider } from './hooks';
 
 const App = () => (
   <ActiveThemeProvider>

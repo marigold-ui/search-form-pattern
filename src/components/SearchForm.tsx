@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
-import { useStarWarsSearch } from '../hooks/useStarWarsSearch';
-import { useStarWarsStore } from '../hooks/useStarWarsStore';
+
+import { useStarWarsSearch, useStarWarsStore } from '../hooks/';
 
 const SearchForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();

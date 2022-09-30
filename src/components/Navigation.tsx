@@ -7,7 +7,8 @@ import {
   Button,
   Text,
 } from '@marigold/components';
-import { ThemeNames, useActiveTheme } from './provider/ActiveThemeProvider';
+
+import { ThemeNames, useActiveTheme } from './provider';
 
 const Navigation = () => {
   const { current, themes, setActiveTheme: setCurrentTheme } = useActiveTheme();
