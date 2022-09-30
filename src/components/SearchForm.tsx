@@ -6,7 +6,7 @@ import { Search } from '@marigold/icons';
 
 import { useStarWarsSearch, useStarWarsStore } from '../hooks/';
 
-const SearchForm = () => {
+export const SearchForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get('search') || '');
@@ -47,5 +47,3 @@ const SearchForm = () => {
     </form>
   );
 };
-
-export default SearchForm;

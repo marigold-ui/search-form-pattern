@@ -6,7 +6,7 @@ import { Eye } from '@marigold/icons';
 import { useStarWarsStore } from '../hooks';
 import { SearchContext } from './provider';
 
-const ResultList = () => {
+export const ResultList = () => {
   const { setResultDetail } = useContext(SearchContext);
 
   const { people } = useStarWarsStore();
@@ -42,5 +42,3 @@ const ResultList = () => {
     </Table>
   );
 };
-
-export default ResultList;

@@ -10,7 +10,7 @@ import {
 
 import { ThemeNames, useActiveTheme } from './provider';
 
-const Navigation = () => {
+export const Navigation = () => {
   const { current, themes, setActiveTheme: setCurrentTheme } = useActiveTheme();
 
   return (
@@ -35,5 +35,3 @@ const Navigation = () => {
     </nav>
   );
 };
-
-export default Navigation;

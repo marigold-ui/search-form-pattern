@@ -13,7 +13,7 @@ import {
 import { CardList } from './CardList';
 import { SearchContext } from './provider';
 
-const DetailCard = () => {
+export const DetailCard = () => {
   const { resultDetail } = useContext(SearchContext);
 
   if (resultDetail) {

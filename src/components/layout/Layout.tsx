@@ -1,10 +1,9 @@
 import { Aside, Box, Stack } from '@marigold/components';
 
-import SearchForm from '../SearchForm';
-import Navigation from '../Navigation';
-import ResultList from '../ResultList';
 import DetailCard from '../DetailCard';
-
+import { Navigation } from '../Navigation';
+import { ResultList } from '../ResultList';
+import { SearchForm } from '../SearchForm';
 import { SearchContextProvider } from '../provider';
 
 export const Layout = () => {
