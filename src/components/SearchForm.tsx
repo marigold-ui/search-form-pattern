@@ -1,47 +1,45 @@
-import { SetStateAction, useContext, useState } from 'react';
-import useSWR from 'swr';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
-import { SearchContext } from '../Layout/Layout';
+import { useSearchParams } from 'react-router-dom';
+import { useStarWarsSearch } from '../hooks/useStarWarsSearch';
+import { useStarWarsStore } from '../hooks/useStarWarsStore';
 
 const SearchForm = () => {
-  const { searchQuery, setSearchQuery, setSearchResult } =
-    useContext(SearchContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const fetcher: any = (url: RequestInfo | URL) =>
-    fetch(url).then((res) => res.json());
+  const [query, setQuery] = useState(searchParams.get('search') || '');
+  const { state, result } = useStarWarsSearch({ query });
+  const { setPeople } = useStarWarsStore();
 
-  const { data, error } = useSWR(
-    `https://swapi.dev/api/people/?search=${searchQuery}`,
-    fetcher
-  );
+  useEffect(() => {
+    if (state === 'success') {
+      setPeople(result);
+    }
+  }, [state, result]);
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    // Use FormData to get the input values
-    const formData = new FormData(event.target as HTMLFormElement);
-    // Optionally, convert FormData into an object
-    const dataObject = Object.fromEntries(formData);
-    // console.log(dataObject);
-    event.target.reset();
-  };
-
-  const handleOnChange = (event: SetStateAction<string>) => {
-    setSearchQuery(event);
-    setSearchResult(data);
+  const handleSearch: FormEventHandler<HTMLFormElement> = ev => {
+    ev.preventDefault();
+    const data = new FormData(ev.target as HTMLFormElement);
+    const search = (data.get('search') as string) || '';
+    // const json = Object.fromEntries(data) as { search: string };
+    // history.pushState(json, '', location.pathname + '?search=' + json.search);
+    setQuery(search);
+    setSearchParams({ search });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSearch}>
       <Inline space="small">
         <TextField
+          type="search"
           label="Search"
           description="Type in what you are looking for!"
           placeholder="Search..."
           name="search"
+          autoComplete="off"
           width="huge"
-          value={searchQuery}
-          onChange={handleOnChange}
+          defaultValue={query}
         />
         <Button variant="primary" size="small" type="submit">
           <Search /> Search
@@ -52,3 +50,44 @@ const SearchForm = () => {
 };
 
 export default SearchForm;
+
+/**
+ 
+  //let [searchParams, setSearchParams] = useSearchParams();
+
+  const { searchQuery, setSearchQuery, setSearchResult } =
+    useContext(SearchContext);
+
+  const fetcher: any = (url: RequestInfo | URL) =>
+    fetch(url).then(res => res.json());
+
+  const { data, error } = useSWR(
+    `https://swapi.dev/api/people/?search=${searchQuery}`,
+    fetcher
+  );
+
+  useSearchParam(searchQuery);
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    // The serialize function here would be responsible for
+    // creating an object of { key: value } pairs from the
+    // fields in the form that make up the query.
+    history.pushState(data, '', location.pathname + '?search=' + searchQuery);
+
+    //let params = serializeFormQuery(event.target);
+    // setSearchParams(searchQuery);
+    //event.target.reset();
+  };
+
+  const handleOnChange = (event: SetStateAction<string>) => {
+    setSearchQuery(event);
+    console.log(data && data.results);
+    if (data) {
+      setSearchResult(data);
+    }
+  };
+
+
+
+ */
