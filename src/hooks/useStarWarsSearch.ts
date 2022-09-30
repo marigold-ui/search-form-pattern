@@ -1,19 +1,24 @@
 import useSWR from 'swr';
 import { People, Planet } from './useStarWarsStore';
 
+const fetchConfig: RequestInit = {};
+
 const fetcher = async ({ type = 'people', query }: any) => {
   let result;
 
   try {
     const response = await fetch(
-      `https://swapi.dev/api/${type}/?search=${query}`
+      `https://swapi.py4e.com/api/${type}/?search=${query}`,
+      fetchConfig
     );
     result = await response.json().then(json => json.results);
 
     if (type === 'people') {
       result = await Promise.all(
         result.map(async (p: any) => {
-          const homeworld = await fetch(p.homeworld).then(res => res.json());
+          const homeworld = await fetch(p.homeworld, fetchConfig).then(res =>
+            res.json()
+          );
           return {
             ...p,
             homeworld,
@@ -24,7 +29,6 @@ const fetcher = async ({ type = 'people', query }: any) => {
   } catch (e) {
     console.error(e);
   }
-
   return result;
 };
 
