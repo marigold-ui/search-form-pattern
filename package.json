@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=16.x"
   },
+  "packageManager": "pnpm@7.12.2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
