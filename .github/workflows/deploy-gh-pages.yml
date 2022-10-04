@@ -1,6 +1,9 @@
 name: Deploy Github Pages
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
