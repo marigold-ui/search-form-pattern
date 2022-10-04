@@ -12,4 +12,3 @@ with pnpm:
 
 with npm:
 `npm run-script dev`
-
