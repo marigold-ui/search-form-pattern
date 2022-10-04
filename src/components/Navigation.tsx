@@ -16,7 +16,7 @@ export const Navigation = () => {
   return (
     <nav>
       <Inline space="small">
-        <Image src="src/assets/sw.png" alt="Star Wars Logo" height={60} />
+        <Image src="images/sw.png" alt="Star Wars Logo" height={60} />
         <Link href="#">Home</Link>
         <Link href="https://swapi.dev">About</Link>
         <Split />
