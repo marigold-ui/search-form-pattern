@@ -5,6 +5,11 @@ import { ActiveThemeProvider, ActiveThemeConsumer, Layout } from './components';
 import { StarWarsStoreProvider } from './hooks';
 
 const App = () => (
+  /**
+   * QA
+   * Warum gibt es hier den ActiveThemeProvider und ActiveThemeConsumer.
+   * Hätte nicht nur der Active Theme Provider gereicht?
+   */
   <ActiveThemeProvider>
     <ActiveThemeConsumer>
       {({ themes, current }) => (

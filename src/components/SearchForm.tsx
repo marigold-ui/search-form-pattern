@@ -13,6 +13,11 @@ export const SearchForm = () => {
   const { state, result } = useStarWarsSearch({ query });
   const { setPeople } = useStarWarsStore();
 
+  /**
+   * QA
+   * An welchem Punkt Funktioniert es das wir die Search Parameter per Link versenden können und
+   * die dann öffnen das wir das Suchergebnis bekommen?
+   */
   useEffect(() => {
     if (state === 'success') {
       setPeople(result);

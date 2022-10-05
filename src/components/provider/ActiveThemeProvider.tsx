@@ -20,6 +20,11 @@ const Context = React.createContext({
   setActiveTheme: (_: ThemeNames) => {},
 });
 
+
+/**
+ * QA
+ * Context.Consumer -> Ist es egal was hinter Context. steht? Könnte da auch Context.XYZ stehen?
+ */
 export const ActiveThemeConsumer = Context.Consumer;
 
 // Hook
