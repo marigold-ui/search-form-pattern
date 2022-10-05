@@ -22,7 +22,7 @@ export const SearchForm = () => {
     if (state === 'success') {
       setPeople(result);
     }
-  }, [state, result]);
+  }, [state, result, setPeople]);
 
   const handleSearch: FormEventHandler<HTMLFormElement> = ev => {
     ev.preventDefault();
