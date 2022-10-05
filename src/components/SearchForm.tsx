@@ -17,6 +17,7 @@ export const SearchForm = () => {
    * QA
    * An welchem Punkt Funktioniert es das wir die Search Parameter per Link versenden können und
    * die dann öffnen das wir das Suchergebnis bekommen?
+   * -> Ich glaube das kommt von den useSearchParams 🤔
    */
   useEffect(() => {
     if (state === 'success') {
