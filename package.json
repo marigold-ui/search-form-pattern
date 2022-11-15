@@ -22,6 +22,7 @@
     "@marigold/theme-core": "^15.0.0",
     "@marigold/theme-unicorn": "^12.0.0",
     "@marigold/tsconfig": "^0.3.0",
+    "@tanstack/react-query": "^4.16.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.4.3",

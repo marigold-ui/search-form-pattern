@@ -31,7 +31,7 @@ export const ResultList = () => {
               <Button
                 variant="primary"
                 onPress={() => onPressHandler(item)}
-                size="small"
+                size="xxsmall"
               >
                 <Eye />
               </Button>

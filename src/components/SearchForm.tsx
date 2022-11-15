@@ -4,20 +4,22 @@ import { useSearchParams } from 'react-router-dom';
 import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
 
-import { useStarWarsSearch, useStarWarsStore } from '../hooks/';
+import { useStarWarsSearch, useStarWarsStore } from '../hooks';
+import { useSearch } from '../hooks/useSearch';
 
 export const SearchForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get('search') || '');
-  const { state, result } = useStarWarsSearch({ query });
+  //const { state, result } = useStarWarsSearch({ query });
+  const { result, status } = useSearch(query);
   const { setPeople } = useStarWarsStore();
 
   useEffect(() => {
-    if (state === 'success') {
+    if (status === 'success') {
       setPeople(result);
     }
-  }, [state, result, setPeople]);
+  }, [status, result, setPeople]);
 
   const handleSearch: FormEventHandler<HTMLFormElement> = ev => {
     ev.preventDefault();

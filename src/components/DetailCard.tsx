@@ -43,7 +43,13 @@ export const DetailCard = () => {
                   Homeworld: {resultDetail?.homeworld?.name}
                 </List.Item>
               </List>
-              <CardList headline={'Filme'} data={resultDetail?.films} />
+
+              {JSON.stringify(resultDetail.films)}
+              {resultDetail?.films?.map((element: any) => (
+                <div key={element.title}>{element.title}</div>
+              ))}
+              {/* <CardList headline={'Filme'} data={resultDetail?.films} /> */}
+
               <CardList headline={'Fahrzeuge'} data={resultDetail?.vehicles} />
               <CardList
                 headline={'Raumschiffe'}

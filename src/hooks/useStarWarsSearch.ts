@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { People, Planet } from './useStarWarsStore';
+import { People, PeopleResponse, Planet, Film } from './useStarWarsStore';
 
 const fetchConfig: RequestInit = {};
 
@@ -15,14 +15,28 @@ const fetcher = async ({ type = 'people', query }: any) => {
 
     if (type === 'people') {
       result = await Promise.all(
-        result.map(async (p: any) => {
-          const homeworld = await fetch(p.homeworld, fetchConfig).then(res =>
-            res.json()
-          );
+        result.map(async (p: PeopleResponse) => {
+          const [homeworld, ...rest] = await Promise.all([
+            fetch(p.homeworld, fetchConfig).then(res => res.json()),
+            ...p.films.map(async (link: any) => {
+              const res = await fetch(link, fetchConfig);
+              return await res.json();
+            }),
+            ...p.vehicles.map(async (link: any) => {
+              const res = await fetch(link, fetchConfig);
+              return await res.json();
+            }),
+          ]);
+
+          const films = rest.slice(0, p.films.length);
+          const vehicles = rest.slice(p.films.length);
+
           return {
             ...p,
             homeworld,
-          };
+            films,
+            vehicles,
+          } as People;
         })
       );
     }
@@ -36,6 +50,7 @@ const fetcher = async ({ type = 'people', query }: any) => {
 export interface ResultTypes {
   people: People[];
   planets: Planet[];
+  films: Film[];
 }
 
 export interface UseStarWarsSearchProps<T extends keyof ResultTypes> {
