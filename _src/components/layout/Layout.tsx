@@ -4,7 +4,7 @@ import DetailCard from '../DetailCard';
 import { Navigation } from '../Navigation';
 import { ResultList } from '../ResultList';
 import { SearchForm } from '../SearchForm';
-import { SearchContextProvider } from '../provider';
+import { SearchContextProvider } from '../../../src/provider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const Layout = () => {

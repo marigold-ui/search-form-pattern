@@ -29,7 +29,7 @@ export const useSearch = (query: string) => {
 
   const { data: homeworld } = useQuery({
     queryKey: ['planet', getIdFromUrl(person?.homeworld)],
-    queryFn: () => get<Planet>(`https://swapi.py4e.com/api/planet/${id}`),
+    queryFn: () => get<Planet>(`https://swapi.py4e.com/api/planet/${id}/`),
     onSuccess: planet => {
       queryClient.setQueryData(['planet', getIdFromUrl(planet.url)], planet);
     },

@@ -4,7 +4,7 @@ import { Button, Table } from '@marigold/components';
 import { Eye } from '@marigold/icons';
 
 import { useStarWarsStore } from '../hooks';
-import { SearchContext } from './provider';
+import { SearchContext } from '../../src/provider';
 
 export const ResultList = () => {
   const { setResultDetail } = useContext(SearchContext);
