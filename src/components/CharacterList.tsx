@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getJson } from '../api/getJson';
 import { useSearchParam } from '../hook/useSearchQuery';
@@ -11,22 +11,28 @@ import { useSelectedParam } from '../hook/useSelectedParam';
 
 export const useCharacterList = () => {
   const [search] = useSearchParam();
+  const queryClient = useQueryClient();
   const { data, status, error } = useQuery({
     queryKey: ['search', search],
     queryFn: () =>
       getJson(`https://swapi.py4e.com/api/people/?search=${search}`),
+    onSuccess: data => {
+      //TODO: add characters to the cache
+      // data.forEach(item =>
+      //   queryClient.setQueryData(['character', getIdFromUrl(item.url)], item)
+      // );
+    },
   });
 
   return { status, error, characters: data?.results || [] };
 };
 
+export const useCharacterDetail = () => {};
+
 export const CharacterList = () => {
   const { characters } = useCharacterList();
 
   const [, setSelected] = useSelectedParam();
-  const handleOnPress = character => {
-    setSelected(character?.name);
-  };
 
   return (
     <Table aria-label="Search results table">
@@ -46,7 +52,7 @@ export const CharacterList = () => {
               <Button
                 variant="primary"
                 size="xxsmall"
-                onPress={() => handleOnPress(character)}
+                onPress={() => setSelected(getIdFromUrl(character?.url))}
               >
                 <Eye />
               </Button>
