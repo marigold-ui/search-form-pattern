@@ -9,13 +9,17 @@ import { Homeworld } from './Homeworld';
 import { getIdFromUrl } from '../api/getIdFromUrl';
 import { useSelectedParam } from '../hook/useSelectedParam';
 
+export interface Data {
+  results: any[];
+}
+
 export const useCharacterList = () => {
   const [search] = useSearchParam();
   const queryClient = useQueryClient();
   const { data, status, error } = useQuery({
     queryKey: ['search', search],
     queryFn: () =>
-      getJson(`https://swapi.py4e.com/api/people/?search=${search}`),
+      getJson<Data>(`https://swapi.py4e.com/api/people/?search=${search}`),
     onSuccess: data => {
       //TODO: add characters to the cache
       data?.results.forEach(item =>
@@ -23,6 +27,8 @@ export const useCharacterList = () => {
       );
     },
   });
+
+  console.log('data results: ', data?.results);
 
   return { status, error, characters: data?.results || [] };
 };
