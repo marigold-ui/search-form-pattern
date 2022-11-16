@@ -34,6 +34,5 @@ export const useFilm = (id: number) => {
 
 export const Film = ({ id }: FilmProps) => {
   const { film } = useFilm(id);
-  console.log(film);
   return <Text>{film?.title}</Text>;
 };

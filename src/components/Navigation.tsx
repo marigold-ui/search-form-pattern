@@ -19,7 +19,7 @@ export const Navigation = () => {
       <Inline space="small">
         <Image src="images/sw.png" alt="Star Wars Logo" height={60} />
         <Link href="#">Home</Link>
-        <Link href="https://swapi.dev">About</Link>
+        <Link href="https://swapi.py4e.com/">About</Link>
         <Split />
         <Menu.Trigger>
           <Button variant="menu" size="small">
