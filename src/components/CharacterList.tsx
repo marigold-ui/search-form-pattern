@@ -2,12 +2,12 @@ import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getJson } from '../api/getJson';
-import { useSearchParam } from '../hook/useSearchQuery';
+import { useSearchParam } from '../hooks/useSearchQuery';
 import { Button, Table } from '@marigold/components';
 import { Eye } from '@marigold/icons';
 import { Homeworld } from './Homeworld';
 import { getIdFromUrl } from '../api/getIdFromUrl';
-import { useSelectedParam } from '../hook/useSelectedParam';
+import { useSelectedParam } from '../hooks/useSelectedParam';
 
 export interface Data {
   results: any[];
