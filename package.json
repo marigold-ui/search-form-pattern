@@ -22,9 +22,7 @@
     "@marigold/theme-core": "^15.0.0",
     "@marigold/theme-unicorn": "^12.0.0",
     "@marigold/tsconfig": "^0.3.0",
-    "@tanstack/react-query": "^4.16.1",
     "react": "^18.2.0",
-    "react-content-loader": "^6.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.4.3",
     "react-router-dom": "6",
@@ -35,7 +33,7 @@
     "@types/react-dom": "^18.0.8",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.9.3",
+    "typescript": "^4.8.4",
     "vite": "^3.2.3"
   }
 }

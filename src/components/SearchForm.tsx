@@ -1,24 +1,34 @@
-import React, { FormEventHandler } from 'react';
-import { Button, Inline, TextField } from '@marigold/components';
+import { FormEventHandler, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { Inline, TextField, Button } from '@marigold/components';
 import { Search } from '@marigold/icons';
 
-import { useSearchParam } from '../hooks/useSearchQuery';
-
-export interface SearchFormProps {
-  onSubmit: FormEventHandler<HTMLFormElement>;
-}
+import { useStarWarsSearch, useStarWarsStore } from '../hooks/';
 
 export const SearchForm = () => {
-  const [search, setSearch] = useSearchParam();
-  const handleSubmit = ev => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [query, setQuery] = useState(searchParams.get('search') || '');
+  const { state, result } = useStarWarsSearch({ query });
+  const { setPeople } = useStarWarsStore();
+
+  useEffect(() => {
+    if (state === 'success') {
+      setPeople(result);
+    }
+  }, [state, result, setPeople]);
+
+  const handleSearch: FormEventHandler<HTMLFormElement> = ev => {
     ev.preventDefault();
     const data = new FormData(ev.target as HTMLFormElement);
     const search = (data.get('search') as string) || '';
-    setSearch(search);
+    setQuery(search);
+    setSearchParams({ search });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSearch}>
       <Inline space="small">
         <TextField
           type="search"
@@ -28,7 +38,7 @@ export const SearchForm = () => {
           name="search"
           autoComplete="off"
           width="huge"
-          defaultValue={search}
+          defaultValue={query}
         />
         <Button variant="primary" size="small" type="submit">
           <Search /> Search

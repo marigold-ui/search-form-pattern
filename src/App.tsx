@@ -1,32 +1,29 @@
-import { Aside, Box, Stack } from '@marigold/components';
-import { Suspense } from 'react';
-import { CharacterList, DetailCard, SearchForm } from './components';
-import CardLoader from './components/CardLoader';
-import { Navigation } from './components/Navigation';
+import { Box, MarigoldProvider } from '@marigold/components';
+import { BrowserRouter } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <Box
-      css={{
-        p: 'medium',
-      }}
-    >
-      <Stack space="xlarge">
-        <Navigation />
-        <SearchForm />
-        <Aside space="large">
-          <div>
-            <CharacterList />
-          </div>
-          <div>
-            <Suspense fallback={<CardLoader />}>
-              <DetailCard />
-            </Suspense>
-          </div>
-        </Aside>
-      </Stack>
-    </Box>
-  );
-};
+import { ActiveThemeProvider, ActiveThemeConsumer, Layout } from './components';
+import { StarWarsStoreProvider } from './hooks';
+
+const App = () => (
+  <ActiveThemeProvider>
+    <ActiveThemeConsumer>
+      {({ themes, current }) => (
+        <MarigoldProvider theme={themes[current]}>
+          <StarWarsStoreProvider>
+            <BrowserRouter>
+              <Box
+                css={{
+                  p: 'medium',
+                }}
+              >
+                <Layout />
+              </Box>
+            </BrowserRouter>
+          </StarWarsStoreProvider>
+        </MarigoldProvider>
+      )}
+    </ActiveThemeConsumer>
+  </ActiveThemeProvider>
+);
 
 export default App;
