@@ -57,8 +57,6 @@ const Character = ({ id }: CharacterProps) => {
       getJson<Character>(`https://swapi.py4e.com/api/people/${id}/`),
   });
 
-  console.log(character);
-
   return (
     <Card aria-hidden="false">
       <Header>

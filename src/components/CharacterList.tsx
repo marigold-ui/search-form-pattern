@@ -21,14 +21,11 @@ export const useCharacterList = () => {
     queryFn: () =>
       getJson<Data>(`https://swapi.py4e.com/api/people/?search=${search}`),
     onSuccess: data => {
-      //TODO: add characters to the cache
       data?.results.forEach(item =>
         queryClient.setQueryData(['character', getIdFromUrl(item.url)], item)
       );
     },
   });
-
-  console.log('data results: ', data?.results);
 
   return { status, error, characters: data?.results || [] };
 };
