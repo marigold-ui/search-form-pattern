@@ -23,7 +23,7 @@ import { Starship } from './Starships';
 export const DetailCard = () => {
   const [id] = useSelectedParam();
 
-  return id ? <Character id={Number(id)} /> : <strong>empty</strong>;
+  return id ? <Character id={Number(id)} /> : null;
 };
 
 export interface CharacterProps {

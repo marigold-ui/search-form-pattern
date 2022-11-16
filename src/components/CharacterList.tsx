@@ -36,6 +36,10 @@ export const CharacterList = () => {
 
   const [, setSelected] = useSelectedParam();
 
+  if (characters.length === 0) {
+    return <Text>No character found.</Text>;
+  }
+
   return (
     <Table aria-label="Search results table" variant="compact">
       <Table.Header>

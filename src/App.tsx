@@ -16,7 +16,9 @@ const App = () => {
         <SearchForm />
         <Aside space="large">
           <div>
-            <CharacterList />
+            <Suspense fallback={<CardLoader />}>
+              <CharacterList />
+            </Suspense>
           </div>
           <div>
             <Suspense fallback={<CardLoader />}>
