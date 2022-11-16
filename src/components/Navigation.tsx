@@ -23,15 +23,14 @@ export const Navigation = () => {
         <Split />
         <Menu.Trigger>
           <Button variant="menu" size="small">
-            Choose Menu
+            Theme: {current.replace(/theme/i, '')}
           </Button>
           <Menu onSelect={current => setCurrentTheme(current as ThemeNames)}>
             {Object.keys(themes).map(name => (
-              <Menu.Item key={name}>{name}</Menu.Item>
+              <Menu.Item key={name}>{name.replace(/theme/i, '')}</Menu.Item>
             ))}
           </Menu>
         </Menu.Trigger>
-        <Text>{current}</Text>
       </Inline>
     </nav>
   );

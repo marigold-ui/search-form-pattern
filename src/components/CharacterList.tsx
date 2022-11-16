@@ -1,9 +1,8 @@
-import React from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getJson } from '../api/getJson';
 import { useSearchParam } from '../hooks/useSearchQuery';
-import { Button, Table } from '@marigold/components';
+import { Button, Table, Text } from '@marigold/components';
 import { Eye } from '@marigold/icons';
 import { Homeworld } from './Homeworld';
 import { getIdFromUrl } from '../api/getIdFromUrl';
@@ -38,7 +37,7 @@ export const CharacterList = () => {
   const [, setSelected] = useSelectedParam();
 
   return (
-    <Table aria-label="Search results table">
+    <Table aria-label="Search results table" variant="compact">
       <Table.Header>
         <Table.Column>Name</Table.Column>
         <Table.Column>Homeworld</Table.Column>
@@ -47,14 +46,15 @@ export const CharacterList = () => {
       <Table.Body>
         {characters.map((character: any) => (
           <Table.Row key={character.name}>
-            <Table.Cell>{character.name}</Table.Cell>
+            <Table.Cell>
+              <Text>{character.name}</Text>
+            </Table.Cell>
             <Table.Cell>
               <Homeworld id={getIdFromUrl(character?.homeworld)} />
             </Table.Cell>
             <Table.Cell>
               <Button
-                variant="primary"
-                size="xxsmall"
+                variant="ghost"
                 onPress={() => setSelected(getIdFromUrl(character?.url))}
               >
                 <Eye />

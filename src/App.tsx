@@ -1,7 +1,9 @@
 import { Aside, Box, Stack } from '@marigold/components';
-import React from 'react';
+import { Suspense } from 'react';
 import { CharacterList, DetailCard, SearchForm } from './components';
 import { Navigation } from './components/Navigation';
+
+const Loading = () => <strong>loading...!!!</strong>;
 
 const App = () => {
   return (
@@ -18,7 +20,9 @@ const App = () => {
             <CharacterList />
           </div>
           <div>
-            <DetailCard />
+            <Suspense fallback={<Loading />}>
+              <DetailCard />
+            </Suspense>
           </div>
         </Aside>
       </Stack>

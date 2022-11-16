@@ -11,7 +11,6 @@ import {
   Text,
 } from '@marigold/components';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 import { getIdFromUrl } from '../api/getIdFromUrl';
 import { getJson } from '../api/getJson';
 import { useSelectedParam } from '../hooks/useSelectedParam';
@@ -51,90 +50,99 @@ export interface Character {
 }
 
 const Character = ({ id }: CharacterProps) => {
-  const { data: character } = useQuery({
+  const { status, data: character } = useQuery({
     queryKey: ['character', id],
     queryFn: () =>
       getJson<Character>(`https://swapi.py4e.com/api/people/${id}/`),
   });
 
+  if (status === 'loading') {
+    return <div>loading...</div>;
+  }
+
+  if (status === 'error') {
+    return <div>ERRRRR Bib bop...</div>;
+  }
+
   return (
     <Card aria-hidden="false">
       <Header>
         <Center>
-          <Headline level="2">{character?.name}</Headline>
-          <Headline level="3">{character?.birth_year}</Headline>
+          <Headline level="2">{character.name}</Headline>
+          <Headline level="3">{character.birth_year}</Headline>
         </Center>
       </Header>
       <Body>
         <Container>
           <Stack space="medium">
             <List>
-              {character?.gender === 'n/a' ? (
+              {character.gender === 'n/a' ? (
                 <List.Item>
                   <Inline space="xxsmall">
-                    <Text>Species: </Text>
-                    {character?.species.map(specie => (
+                    <Text>Species:</Text>
+                    {character.species.map(specie => (
                       <Species key={specie} id={getIdFromUrl(specie)} />
                     ))}
                   </Inline>
                 </List.Item>
               ) : (
                 <List.Item>
-                  <Text>Gender: {character?.gender}</Text>
+                  <Text>Gender: {character.gender}</Text>
                 </List.Item>
               )}
               <List.Item>
-                <Text>Height: {character?.height}</Text>
+                <Text>Height: {character.height}</Text>
               </List.Item>
               <List.Item>
-                <Text>Mass: {character?.mass}</Text>
+                <Text>Mass: {character.mass}</Text>
               </List.Item>
               <List.Item>
-                <Text>Eye Color: {character?.eye_color}</Text>
+                <Text>Eye Color: {character.eye_color}</Text>
               </List.Item>
               <List.Item>
-                <Text>Hair Color: {character?.hair_color}</Text>
+                <Text>Hair Color: {character.hair_color}</Text>
               </List.Item>
               <List.Item>
-                <Text>Skin Color: {character?.skin_color}</Text>
+                <Text>Skin Color: {character.skin_color}</Text>
               </List.Item>
-              {character?.homeworld && (
+              <List.Item>
+                <Inline space="xxsmall">
+                  <Text>Homeworld:</Text>
+                  <Homeworld id={getIdFromUrl(character.homeworld)} />
+                </Inline>
+              </List.Item>
+              <List.Item>
+                <Text>Films:</Text>
+                <List>
+                  {character.films.map(film => (
+                    <List.Item key={film}>
+                      <Film id={getIdFromUrl(film)} />
+                    </List.Item>
+                  ))}
+                </List>
+              </List.Item>
+              {character.vehicles.length !== 0 && (
                 <List.Item>
-                  <Inline space="xxsmall">
-                    <Text>Homeworld: </Text>
-                    <Homeworld id={getIdFromUrl(character?.homeworld)} />
-                  </Inline>
-                </List.Item>
-              )}
-              {character?.films && (
-                <List.Item>
-                  <Inline space="xxsmall">
-                    <Text>Films: </Text>
-                    {character?.films.map(film => (
-                      <Film key={film} id={getIdFromUrl(film)} />
+                  <Text>Vehicles:</Text>
+                  <List>
+                    {character.vehicles.map(vehicle => (
+                      <List.Item key={vehicle}>
+                        <Vehicles id={getIdFromUrl(vehicle)} />
+                      </List.Item>
                     ))}
-                  </Inline>
+                  </List>
                 </List.Item>
               )}
-              {character?.vehicles.length !== 0 && (
+              {character.starships.length !== 0 && (
                 <List.Item>
-                  <Inline space="xxsmall">
-                    <Text>Vehicles: </Text>
-                    {character?.vehicles.map(vehicle => (
-                      <Vehicles key={vehicle} id={getIdFromUrl(vehicle)} />
+                  <Text>Spaceships:</Text>
+                  <List>
+                    {character.starships.map(starship => (
+                      <List.Item key={starship}>
+                        <Starship id={getIdFromUrl(starship)} />
+                      </List.Item>
                     ))}
-                  </Inline>
-                </List.Item>
-              )}
-
-              {character?.starships.length !== 0 && (
-                <List.Item>
-                  <Inline space="xxsmall">
-                    <Text>Spaceships: </Text>
-                    {character?.starships.map(starship => (
-                      <Starship key={starship} id={getIdFromUrl(starship)} />
-                    ))}
-                  </Inline>
+                  </List>
                 </List.Item>
               )}
             </List>

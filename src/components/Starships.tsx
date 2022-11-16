@@ -32,7 +32,7 @@ export const useStarships = (id: number) => {
   const { data: starship } = useQuery({
     queryKey: ['starship', id],
     queryFn: () =>
-      getJson<Starship>(`https://swapi.py4e.com/api/planets/${id}/`),
+      getJson<Starship>(`https://swapi.py4e.com/api/starships/${id}/`),
   });
 
   return { starship };
