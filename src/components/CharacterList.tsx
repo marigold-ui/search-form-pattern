@@ -18,9 +18,9 @@ export const useCharacterList = () => {
       getJson(`https://swapi.py4e.com/api/people/?search=${search}`),
     onSuccess: data => {
       //TODO: add characters to the cache
-      // data.forEach(item =>
-      //   queryClient.setQueryData(['character', getIdFromUrl(item.url)], item)
-      // );
+      data?.results.forEach(item =>
+        queryClient.setQueryData(['character', getIdFromUrl(item.url)], item)
+      );
     },
   });
 
