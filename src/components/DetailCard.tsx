@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { getIdFromUrl } from '../api/getIdFromUrl';
 import { getJson } from '../api/getJson';
-import { useSelectedParam } from '../hook/useSelectedParam';
+import { useSelectedParam } from '../hooks/useSelectedParam';
 import { Film } from './Film';
 import { Homeworld } from './Homeworld';
 import { Species } from './Species';

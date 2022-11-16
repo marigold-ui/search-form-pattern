@@ -2,7 +2,7 @@ import React, { FormEventHandler } from 'react';
 import { Button, Inline, TextField } from '@marigold/components';
 import { Search } from '@marigold/icons';
 
-import { useSearchParam } from '../hook/useSearchQuery';
+import { useSearchParam } from '../hooks/useSearchQuery';
 
 export interface SearchFormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
