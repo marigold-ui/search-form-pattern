@@ -16,6 +16,7 @@ specifiers:
   '@types/react-router-dom': ^5.3.3
   '@vitejs/plugin-react': ^2.2.0
   react: ^18.2.0
+  react-content-loader: ^6.2.0
   react-dom: ^18.2.0
   react-router: ^6.4.3
   react-router-dom: '6'
@@ -35,6 +36,7 @@ dependencies:
   '@marigold/tsconfig': 0.3.0
   '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
+  react-content-loader: 6.2.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router: 6.4.3_react@18.2.0
   react-router-dom: 6.4.2_biqbaboplfbrettd7655fr4n2y
@@ -4421,6 +4423,15 @@ packages:
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+    dev: false
+
+  /react-content-loader/6.2.0_react@18.2.0:
+    resolution: {integrity: sha512-r1dI6S+uHNLW68qraLE2njJYOuy6976PpCExuCZUcABWbfnF3FMcmuESRI8L4Bj45wnZ7n8g71hkPLzbma7/Cw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-dom/18.2.0_react@18.2.0:
