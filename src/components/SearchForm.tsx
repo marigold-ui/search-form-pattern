@@ -10,7 +10,7 @@ export interface SearchFormProps {
 
 export const SearchForm = () => {
   const [search, setSearch] = useSearchParam();
-  const handleSubmit = ev => {
+  const handleSubmit = (ev: Event) => {
     ev.preventDefault();
     const data = new FormData(ev.target as HTMLFormElement);
     const search = (data.get('search') as string) || '';
