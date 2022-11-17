@@ -5,6 +5,9 @@
   "homepage": "https://marigold-ui.github.io/search-form-pattern/",
   "packageManager": "pnpm@7.12.2",
   "browserslist": "> 0.5%, last 2 versions, not dead",
+  "alias": {
+    "process": false
+  },
   "scripts": {
     "start": "parcel 'src/index.html'",
     "build": "parcel build 'src/index.html'"
