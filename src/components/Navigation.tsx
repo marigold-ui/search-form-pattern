@@ -1,13 +1,6 @@
-import {
-  Inline,
-  Image,
-  Link,
-  Split,
-  Menu,
-  Button,
-  Text,
-} from '@marigold/components';
-import React from 'react';
+import { Inline, Image, Link, Split, Menu, Button } from '@marigold/components';
+
+import image from '../../public/images/sw.png';
 
 import { ThemeNames, useActiveTheme } from '../../src/provider';
 
@@ -17,7 +10,7 @@ export const Navigation = () => {
   return (
     <nav>
       <Inline space="small">
-        <Image src="images/sw.png" alt="Star Wars Logo" height={60} />
+        <Image src={image} alt="Star Wars Logo" height={60} />
         <Link href="#">Home</Link>
         <Link href="https://swapi.py4e.com/">About</Link>
         <Split />
