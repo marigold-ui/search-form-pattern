@@ -29,7 +29,7 @@ jobs:
 
       # Action
       - name: Build Github Pages
-        run: pnpm build "src/index.html"
+        run: pnpm build
       - name: Deploy Github Pages to Github Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
