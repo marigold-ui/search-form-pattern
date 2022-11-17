@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "parcel 'src/index.html'",
-    "build": "parcel build 'src/index.html'"
+    "build": "parcel build 'src/index.html'",
+    "build:gh-pages": "parcel build 'src/index.html' --public-url https://marigold-ui.github.io/search-form-pattern/"
   },
   "dependencies": {
     "@marigold/components": "^4.0.0",
