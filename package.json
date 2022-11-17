@@ -2,7 +2,7 @@
   "name": "search-example",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./search-form-pattern/",
+  "homepage": "/search-form-pattern/",
   "packageManager": "pnpm@7.12.2",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
