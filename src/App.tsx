@@ -1,4 +1,3 @@
-import React from 'react';
 import { Aside, Box, Stack } from '@marigold/components';
 import { Suspense } from 'react';
 import { CharacterList, DetailCard, SearchForm } from './components';
