@@ -8,10 +8,11 @@
     "lib": ["ESNext", "DOM"],
     /* Specify JSX code generation */
     "jsx": "react-jsx",
+    "noEmit": true,
     /* Generate corresponding .map files */
     "sourceMap": true,
     /* Enable all strict type-checking options */
-    "strict": true,
+    "strict": false,
     /* Specify module resolution strategy */
     "moduleResolution": "node",
     /* Base directory to resolve non-absolute module names */
@@ -27,5 +28,10 @@
     /*  Emit interop between CommonJS and ES modules */
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "index.d.ts"]
+  "include": [
+    "src/**/*",
+    "index.d.ts",
+    "**/*.tsx",
+    "node_modules/@types/testing-library__jest-dom/index.d.ts"
+  ]
 }
