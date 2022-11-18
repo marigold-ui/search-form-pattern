@@ -1,23 +1,49 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import nock from 'nock';
+import {
+  prettyDOM,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { Film, useFilm } from './Film';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { getIdFromUrl } from '~/api/getIdFromUrl';
 
-export const queryClient = new QueryClient();
+nock('https://swapi.py4e.com').get('/api/films/1/').reply(
+  200,
+  {
+    title: 'Some random Star Wars Film',
+  },
+  { 'Access-Control-Allow-Origin': '*' }
+);
 
-const data: {
-  title: 'A New Hope';
-};
+const queryClient = new QueryClient();
+const wrapper = ({ children }) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);
 
-test('renders Film', id => {
+test('fetch film', async () => {
+  const { result } = renderHook(() => useFilm(1), { wrapper });
+  await waitFor(() => expect(result.current.isSuccess).toBe(true));
+  expect(result.current.film).toMatchInlineSnapshot(`
+    {
+      "title": "Some random Star Wars Film",
+    }
+  `);
+});
+
+test('renders film title', async () => {
   render(
     <QueryClientProvider client={queryClient}>
-      <Film data-testid="film" id={0} />
+      <Film data-testid="1" id={1} />
     </QueryClientProvider>
   );
 
-  const film = screen.getByTestId('film');
-  expect(film).toBeInTheDocument();
+  await waitFor(() =>
+    expect(screen.getByText('Some random Star Wars Film')).toBeInTheDocument()
+  );
 });
 
 // render film
@@ -25,8 +51,6 @@ test('renders Film', id => {
 // render film title
 
 // Navigation renders
-
-// Navigation has image
 
 // Navigation can switch theme
 
@@ -55,5 +79,3 @@ test('renders Film', id => {
 // has informations (name, birthyear etc.)
 
 // spaceships, vehicles, species
-
-//

@@ -25,14 +25,14 @@ export interface Film {
 }
 
 export const useFilm = (id: number) => {
-  const { data: film } = useQuery({
+  const { data, ...query } = useQuery({
     queryKey: ['film', id],
     queryFn: () => getJson<Film>(`https://swapi.py4e.com/api/films/${id}/`),
   });
-  return { film };
+  return { film: data, ...query };
 };
 
-export const Film = ({ id }: FilmProps) => {
+export const Film = ({ id, ...props }: FilmProps) => {
   const { film } = useFilm(id);
-  return <Text>{film?.title}</Text>;
+  return <Text {...props}>{film?.title}</Text>;
 };
