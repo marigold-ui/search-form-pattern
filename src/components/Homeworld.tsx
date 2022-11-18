@@ -23,15 +23,15 @@ export interface Planet {
   url: string;
 }
 export const useHomeworld = (id: number) => {
-  const { data: homeworld } = useQuery({
+  const { data, ...query } = useQuery({
     queryKey: ['homeworld', id],
     queryFn: () => getJson<Planet>(`https://swapi.py4e.com/api/planets/${id}/`),
   });
 
-  return { homeworld };
+  return { homeworld: data, ...query };
 };
 
-export const Homeworld = ({ id }: HomeworldProps) => {
+export const Homeworld = ({ id, ...props }: HomeworldProps) => {
   const { homeworld } = useHomeworld(id);
-  return <Text>{homeworld?.name}</Text>;
+  return <Text {...props}>{homeworld?.name}</Text>;
 };

@@ -15,7 +15,7 @@ export interface Data {
 export const useCharacterList = () => {
   const [search] = useSearchParam();
   const queryClient = useQueryClient();
-  const { data, status, error } = useQuery({
+  const { data, status, error, ...query } = useQuery({
     queryKey: ['search', search],
     queryFn: () =>
       getJson<Data>(`https://swapi.py4e.com/api/people/?search=${search}`),
@@ -26,7 +26,7 @@ export const useCharacterList = () => {
     },
   });
 
-  return { status, error, characters: data?.results || [] };
+  return { status, ...query, error, characters: data?.results || [] };
 };
 
 export const useCharacterDetail = () => {};

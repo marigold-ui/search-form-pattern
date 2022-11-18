@@ -1,15 +1,8 @@
 import React from 'react';
 import nock from 'nock';
-import {
-  prettyDOM,
-  render,
-  renderHook,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import { Film, useFilm } from './Film';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
+import { Film, useFilm } from '../Film';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { getIdFromUrl } from '~/api/getIdFromUrl';
 
 nock('https://swapi.py4e.com').get('/api/films/1/').reply(
   200,
@@ -45,10 +38,6 @@ test('renders film title', async () => {
     expect(screen.getByText('Some random Star Wars Film')).toBeInTheDocument()
   );
 });
-
-// render film
-
-// render film title
 
 // Navigation renders
 
