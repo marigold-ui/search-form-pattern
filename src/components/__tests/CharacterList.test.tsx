@@ -22,7 +22,7 @@ nock('https://swapi.py4e.com')
   .reply(
     200,
     uri => {
-      const url = new URL(`http://fu.com/${uri}`);
+      const url = new URL(`https://swapi.py4e.com/${uri}`);
       const search = url.searchParams.get('search');
 
       switch (search) {
@@ -84,6 +84,17 @@ test('fetch characterlist', async () => {
       },
     ]
   `);
+});
+
+test('error if no character is found', async () => {
+  const { result } = renderHook(() => useCharacterList(), {
+    wrapper: createWrapper(''),
+  });
+
+  await waitFor(() => {
+    expect(result.current.isSuccess).toBe(false);
+  });
+  expect(result.current.characters).toMatchInlineSnapshot(`[]`);
 });
 
 // loading, error, llist
