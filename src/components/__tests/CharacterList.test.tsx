@@ -6,6 +6,7 @@ import {
   screen,
   waitFor,
   render,
+  fireEvent,
 } from '@testing-library/react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { CharacterList, useCharacterList } from '../CharacterList';
@@ -13,6 +14,7 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { useSelectedParam } from '~/hooks/useSelectedParam';
 import userEvent from '@testing-library/user-event';
 import { SearchForm } from '../SearchForm';
+import { DetailCard } from '../DetailCard';
 
 const params = new URLSearchParams({ search: 'lu' });
 
@@ -33,12 +35,13 @@ nock('https://swapi.py4e.com')
             results: [
               {
                 name: 'Luke',
-                planet: 'Tatooine',
+                homeworld: 'http://example.com/1/',
                 url: 'http://example.com/1/',
+                birth_year: '19BBY',
               },
               {
                 name: 'Luminara',
-                planet: 'Mirial',
+                homeworld: 'http://example.com/1/',
                 url: 'http://example.com/2/',
               },
             ],
@@ -73,13 +76,14 @@ test('fetch characterlist', async () => {
   expect(result.current.characters).toMatchInlineSnapshot(`
     [
       {
+        "birth_year": "19BBY",
+        "homeworld": "http://example.com/1/",
         "name": "Luke",
-        "planet": "Tatooine",
         "url": "http://example.com/1/",
       },
       {
+        "homeworld": "http://example.com/1/",
         "name": "Luminara",
-        "planet": "Mirial",
         "url": "http://example.com/2/",
       },
     ]
@@ -97,4 +101,20 @@ test('error if no character is found', async () => {
   expect(result.current.characters).toMatchInlineSnapshot(`[]`);
 });
 
-// loading, error, llist
+test('renders character list', async () => {
+  const { result } = renderHook(() => useCharacterList(), {
+    wrapper: createWrapper('lu'),
+  });
+
+  await waitFor(() => {
+    expect(result.current.isSuccess).toBe(true);
+  });
+
+  render(<CharacterList />, { wrapper: createWrapper('lu') });
+
+  const table = screen.getByRole('grid');
+  expect(table).toBeInTheDocument();
+  expect(screen.getByText('Luke')).toBeInTheDocument();
+  expect(screen.getByText('Luminara')).toBeInTheDocument();
+  expect(screen.getAllByRole('button'));
+});

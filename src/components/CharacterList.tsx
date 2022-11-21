@@ -56,6 +56,7 @@ export const CharacterList = () => {
             </Table.Cell>
             <Table.Cell>
               <Button
+                aria-label="view"
                 variant="ghost"
                 onPress={() => setSelected(getIdFromUrl(character?.url))}
               >
