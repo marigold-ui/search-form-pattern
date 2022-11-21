@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-
+import React from 'react';
 import { getJson } from '../api/getJson';
 import { useSearchParam } from '../hooks/useSearchQuery';
 import { Button, Table, Text } from '@marigold/components';
@@ -28,8 +28,6 @@ export const useCharacterList = () => {
 
   return { status, ...query, error, characters: data?.results || [] };
 };
-
-export const useCharacterDetail = () => {};
 
 export const CharacterList = () => {
   const { characters } = useCharacterList();
