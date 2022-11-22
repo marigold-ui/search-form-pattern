@@ -8,7 +8,6 @@ export const useSelectedParam = () => {
   const setSelected = (selected: any) =>
     setParams({
       ...Object.fromEntries(params.entries()),
-      // TODO: Keep other params
       search,
       selected,
     });

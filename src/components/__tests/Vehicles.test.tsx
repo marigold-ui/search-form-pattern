@@ -22,7 +22,7 @@ test('fetch vehicles', async () => {
   await waitFor(() => expect(result.current.isSuccess).toBe(true));
   expect(result.current.vehicles).toMatchInlineSnapshot(`
     {
-      "title": "Sand Crawler",
+      "name": "Sand Crawler",
     }
   `);
 });
