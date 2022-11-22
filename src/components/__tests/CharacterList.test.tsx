@@ -1,7 +1,6 @@
 import React from 'react';
 import nock from 'nock';
 import {
-  prettyDOM,
   renderHook,
   screen,
   waitFor,
@@ -10,10 +9,7 @@ import {
 } from '@testing-library/react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { CharacterList, useCharacterList } from '../CharacterList';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
-import { useSelectedParam } from '~/hooks/useSelectedParam';
-import userEvent from '@testing-library/user-event';
-import { SearchForm } from '../SearchForm';
+import { MemoryRouter } from 'react-router-dom';
 import { DetailCard } from '../DetailCard';
 
 const params = new URLSearchParams({ search: 'lu' });
@@ -117,4 +113,22 @@ test('renders character list', async () => {
   expect(screen.getByText('Luke')).toBeInTheDocument();
   expect(screen.getByText('Luminara')).toBeInTheDocument();
   expect(screen.getAllByRole('button'));
+});
+
+test('clicks on button and opens detail card', async () => {
+  const { result } = renderHook(() => useCharacterList(), {
+    wrapper: createWrapper('lu'),
+  });
+
+  await waitFor(() => {
+    expect(result.current.isSuccess).toBe(true);
+  });
+  render(<CharacterList />, { wrapper: createWrapper('lu') });
+  const buttons = screen.getAllByRole('button');
+  expect(buttons);
+
+  buttons.forEach(element => {
+    fireEvent.click(element);
+    render(<DetailCard data-testid="1" />, { wrapper: createWrapper('lu') });
+  });
 });
