@@ -7,6 +7,3 @@ export const getIdFromUrl = (url: string) => {
 
   return Number(matches?.groups!.id);
 };
-
-// get id from swapi Urls
-// didn't find an id in url (https://swapi.py4e.com/api/films/)
