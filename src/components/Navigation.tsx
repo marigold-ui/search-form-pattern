@@ -1,5 +1,5 @@
+import React from 'react';
 import { Inline, Image, Link, Split, Menu, Button } from '@marigold/components';
-
 import image from '../../public/images/sw.png';
 
 import { ThemeNames, useActiveTheme } from '../../src/provider';
