@@ -1,9 +1,5 @@
 import React from 'react';
 import nock from 'nock';
-import { screen, waitFor, render, renderHook } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Film, useFilm } from '~/components';
-import { getIdFromUrl } from './getIdFromUrl';
 import { getJson } from './getJson';
 
 // with that the error message from nock isn't shown
