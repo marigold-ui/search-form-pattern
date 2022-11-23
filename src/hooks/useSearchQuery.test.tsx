@@ -1,7 +1,9 @@
 import React from 'react';
 import nock from 'nock';
-import { screen, render } from '@testing-library/react';
+import { screen, render, renderHook } from '@testing-library/react';
 import { MemoryRouter, useLocation } from 'react-router-dom';
+import { useSearchParam } from './useSearchQuery';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 nock('https://swapi.py4e.com')
   .get('/api/people/')
@@ -28,6 +30,18 @@ nock('https://swapi.py4e.com')
     { 'Access-Control-Allow-Origin': '*' }
   );
 
+const queryClient = new QueryClient();
+const createWrapper =
+  (query = '') =>
+  ({ children }) =>
+    (
+      <MemoryRouter initialEntries={[`?search=${query}`]}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </MemoryRouter>
+    );
+
 // helper component to show that the search is set
 export const LocationDisplay = () => {
   const location = useLocation();
@@ -36,21 +50,21 @@ export const LocationDisplay = () => {
 };
 
 test('url is set correctly if search is luke', () => {
-  render(
-    <MemoryRouter initialEntries={[`?search=luke`]}>
-      <LocationDisplay />
-    </MemoryRouter>
-  );
+  renderHook(() => useSearchParam(), {
+    wrapper: createWrapper('luke'),
+  });
+
+  render(<LocationDisplay />, { wrapper: createWrapper('luke') });
+
   expect(screen.getByTestId('location-display')).toHaveTextContent(
     '?search=luke'
   );
 });
 
 test('url is set correctly if search is not set', () => {
-  render(
-    <MemoryRouter initialEntries={[`?search=`]}>
-      <LocationDisplay />
-    </MemoryRouter>
-  );
+  renderHook(() => useSearchParam(), {
+    wrapper: createWrapper('luke'),
+  });
+  render(<LocationDisplay />, { wrapper: createWrapper('') });
   expect(screen.getByTestId('location-display')).toHaveTextContent('?search=');
 });
