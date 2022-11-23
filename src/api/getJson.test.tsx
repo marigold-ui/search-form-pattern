@@ -15,20 +15,18 @@ nock('https://swapi.py4e.com').get('/api/films/1/').reply(
   { 'Access-Control-Allow-Origin': '*' }
 );
 
-const queryClient = new QueryClient();
-const wrapper = ({ children }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
+test('get json from and fetch url', async () => {
+  const url = 'https://swapi.py4e.com/api/films/1/';
+  expect(await getJson(url));
+});
 
 test('get json error', async () => {
   const url = 'https://swapi.py4e.com/api/films';
 
   try {
-    expect.assertions(1);
-    return expect(async () => {
-      await getJson(url);
-    }).rejects.toThrow();
+    return expect(await getJson(url)).rejects.toThrow();
   } catch (e) {
-    expect(e).toEqual('Error: Network request failed');
+    expect(e.message).toEqual('Network request failed');
   }
+  expect.assertions(1);
 });
