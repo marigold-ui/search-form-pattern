@@ -11,6 +11,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { getJson } from '~/api/getJson';
 import { Film } from '../Film';
 import { getIdFromUrl } from '~/api/getIdFromUrl';
+import { useComponentStyles } from '@marigold/system';
 
 nock('https://swapi.py4e.com')
   .get('/api/people/1/')
@@ -122,7 +123,7 @@ beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
 });
 
-test.only('failing', async () => {
+test('failing', async () => {
   nock('https://swapi.py4e.com')
     .get('/api/people/404')
     .reply(500, 'whoopsie', { 'Access-Control-Allow-Origin': '*' });
@@ -141,4 +142,38 @@ test.only('failing', async () => {
 
   await waitFor(() => expect(result.current.status).toBe('error'));
   expect(result.current.isError).toMatchInlineSnapshot(`true`);
+});
+
+test('renders detail view', async () => {
+  const id = 1;
+  const { result } = renderHook(
+    () =>
+      useQuery({
+        queryKey: ['character', id],
+        queryFn: () =>
+          getJson<Character>(`https://swapi.py4e.com/api/people/${id}/`),
+      }),
+    { wrapper }
+  );
+  await waitFor(() => {
+    expect(result.current.isSuccess).toBe(true);
+  });
+
+  render(
+    <MemoryRouter initialEntries={['?search=luke&selected=1']}>
+      <QueryClientProvider client={queryClient}>
+        <DetailCard />
+      </QueryClientProvider>
+    </MemoryRouter>
+  );
+
+  expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
+  expect(screen.getByText('19BBY')).toBeInTheDocument();
+  expect(screen.getByText('Gender: male')).toBeInTheDocument();
+  expect(screen.getByText('Height: 172')).toBeInTheDocument();
+  expect(screen.getByText('Eye Color: blue')).toBeInTheDocument();
+  expect(screen.getByText('Hair Color: blond')).toBeInTheDocument();
+  expect(screen.getByText('Skin Color: fair')).toBeInTheDocument();
+  expect(screen.getByText('Homeworld:')).toBeInTheDocument();
+  // expect(screen.getByText('Tatooine')).toBeInTheDocument();
 });
