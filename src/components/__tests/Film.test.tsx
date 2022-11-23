@@ -38,33 +38,3 @@ test('renders film title', async () => {
     expect(screen.getByText('Some random Star Wars Film')).toBeInTheDocument()
   );
 });
-
-// Navigation renders
-
-// Navigation can switch theme
-
-// Search renders
-
-// Search searches by enter
-
-// Search finds nothing + error
-
-// Search finds character
-
-// shows ResultList
-
-// Detail Button works + get data
-
-// loading state is rendered
-
-// renders Homeworld
-
-// renders name of planet, finds it
-
-// renders character
-
-// renders detailCard
-
-// has informations (name, birthyear etc.)
-
-// spaceships, vehicles, species
