@@ -13,7 +13,8 @@
     "build": "parcel build 'src/index.html'",
     "build:gh-pages": "parcel build 'src/index.html' --public-url https://marigold-ui.github.io/search-form-pattern/",
     "test": "jest --config jest.config.js",
-    "test:watch": "jest --config jest.config.js --watch"
+    "test:watch": "jest --config jest.config.js --watch",
+    "test:nock-debug-watch": "DEBUG=nock.* jest --config jest.config.js --watch"
   },
   "dependencies": {
     "@marigold/components": "4.0.0",

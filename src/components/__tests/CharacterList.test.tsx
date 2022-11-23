@@ -12,8 +12,6 @@ import { CharacterList, useCharacterList } from '../CharacterList';
 import { MemoryRouter } from 'react-router-dom';
 import { DetailCard } from '../DetailCard';
 
-const params = new URLSearchParams({ search: 'lu' });
-
 nock('https://swapi.py4e.com')
   .get('/api/people/')
   .query(query => 'search' in query)
