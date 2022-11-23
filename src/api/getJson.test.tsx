@@ -37,7 +37,7 @@ test('error on response', async () => {
   });
 });
 
-test('error on request', () => {
+test('error on request', async () => {
   nock('https://swapi.py4e.com')
     .get('/api/films')
     .replyWithError('Network  failed');
