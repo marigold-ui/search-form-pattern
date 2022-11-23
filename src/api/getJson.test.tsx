@@ -40,7 +40,7 @@ test('error on response', async () => {
 test('error on request', async () => {
   nock('https://swapi.py4e.com')
     .get('/api/films')
-    .replyWithError('Network  failed');
+    .replyWithError('Network failed');
   const url = 'https://swapi.py4e.com/api/films';
   expect.assertions(1);
   return getJson(url).catch(e => {
