@@ -13,6 +13,14 @@ import { Film } from '../Film';
 import { getIdFromUrl } from '~/api/getIdFromUrl';
 import { useComponentStyles } from '@marigold/system';
 
+nock('https://swapi.py4e.com').get('/api/planets/1/').reply(
+  200,
+  {
+    name: 'Tatooine',
+  },
+  { 'Access-Control-Allow-Origin': '*' }
+);
+
 nock('https://swapi.py4e.com')
   .get('/api/people/1/')
   .reply(
@@ -174,6 +182,8 @@ test('renders detail view', async () => {
   expect(screen.getByText('Eye Color: blue')).toBeInTheDocument();
   expect(screen.getByText('Hair Color: blond')).toBeInTheDocument();
   expect(screen.getByText('Skin Color: fair')).toBeInTheDocument();
-  expect(screen.getByText('Homeworld:')).toBeInTheDocument();
-  // expect(screen.getByText('Tatooine')).toBeInTheDocument();
+  expect(result.current.data.films.length).toBe(5);
+  expect(result.current.data.vehicles.length).toBe(2);
+  expect(result.current.data.starships.length).toBe(2);
+  expect(result.current.data.homeworld).toBeDefined();
 });
