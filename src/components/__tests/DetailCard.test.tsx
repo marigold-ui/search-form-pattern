@@ -9,9 +9,6 @@ import {
 } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { getJson } from '~/api/getJson';
-import { Film } from '../Film';
-import { getIdFromUrl } from '~/api/getIdFromUrl';
-import { useComponentStyles } from '@marigold/system';
 
 nock('https://swapi.py4e.com').get('/api/planets/1/').reply(
   200,
