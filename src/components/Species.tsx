@@ -29,16 +29,16 @@ export interface Species {
 }
 
 export const useSpecies = (id: number) => {
-  const { data: species } = useQuery({
+  const { data: species, ...query } = useQuery({
     queryKey: ['species', id],
     queryFn: () =>
       getJson<Species>(`https://swapi.py4e.com/api/species/${id}/`),
   });
 
-  return { species };
+  return { species, ...query };
 };
 
-export const Species = ({ id }: SpeciesProps) => {
+export const Species = ({ id, ...props }: SpeciesProps) => {
   const { species } = useSpecies(id);
-  return <Text>{species?.name}</Text>;
+  return <Text {...props}>{species?.name}</Text>;
 };

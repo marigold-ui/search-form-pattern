@@ -25,16 +25,16 @@ export interface Vehicles {
 }
 
 export const useVehicals = (id: number) => {
-  const { data: vehicles } = useQuery({
+  const { data, ...query } = useQuery({
     queryKey: ['vehicles', id],
     queryFn: () =>
       getJson<Vehicles>(`https://swapi.py4e.com/api/vehicles/${id}/`),
   });
 
-  return { vehicles };
+  return { vehicles: data, ...query };
 };
 
-export const Vehicles = ({ id }: VehiclesProps) => {
+export const Vehicles = ({ id, ...props }: VehiclesProps) => {
   const { vehicles } = useVehicals(id);
-  return <Text>{vehicles?.name}</Text>;
+  return <Text {...props}>{vehicles?.name}</Text>;
 };

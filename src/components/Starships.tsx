@@ -29,16 +29,16 @@ export interface Starship {
 }
 
 export const useStarships = (id: number) => {
-  const { data: starship } = useQuery({
+  const { data, ...query } = useQuery({
     queryKey: ['starship', id],
     queryFn: () =>
       getJson<Starship>(`https://swapi.py4e.com/api/starships/${id}/`),
   });
 
-  return { starship };
+  return { starship: data, ...query };
 };
 
-export const Starship = ({ id }: StarshipProps) => {
+export const Starship = ({ id, ...props }: StarshipProps) => {
   const { starship } = useStarships(id);
-  return <Text>{starship?.name}</Text>;
+  return <Text {...props}>{starship?.name}</Text>;
 };

@@ -8,7 +8,7 @@ export interface SearchFormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
 }
 
-export const SearchForm = () => {
+export const SearchForm = ({ ...props }) => {
   const [search, setSearch] = useSearchParam();
   const handleSubmit: FormEventHandler<HTMLFormElement> = ev => {
     ev.preventDefault();
@@ -18,7 +18,7 @@ export const SearchForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form aria-label="form" onSubmit={handleSubmit} {...props}>
       <Inline space="small">
         <TextField
           type="search"

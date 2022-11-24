@@ -1,7 +1,7 @@
 export const getIdFromUrl = (url: string) => {
   const matches = url.match(/(?<id>\d+)\/$/);
 
-  if (!matches || undefined) {
+  if (!matches) {
     throw Error('No match');
   }
 

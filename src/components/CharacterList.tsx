@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-
+import React from 'react';
 import { getJson } from '../api/getJson';
 import { useSearchParam } from '../hooks/useSearchQuery';
 import { Button, Table, Text } from '@marigold/components';
@@ -15,7 +15,7 @@ export interface Data {
 export const useCharacterList = () => {
   const [search] = useSearchParam();
   const queryClient = useQueryClient();
-  const { data, status, error } = useQuery({
+  const { data, status, error, ...query } = useQuery({
     queryKey: ['search', search],
     queryFn: () =>
       getJson<Data>(`https://swapi.py4e.com/api/people/?search=${search}`),
@@ -26,10 +26,8 @@ export const useCharacterList = () => {
     },
   });
 
-  return { status, error, characters: data?.results || [] };
+  return { status, ...query, error, characters: data?.results || [] };
 };
-
-export const useCharacterDetail = () => {};
 
 export const CharacterList = () => {
   const { characters } = useCharacterList();
@@ -58,6 +56,7 @@ export const CharacterList = () => {
             </Table.Cell>
             <Table.Cell>
               <Button
+                aria-label="view"
                 variant="ghost"
                 onPress={() => setSelected(getIdFromUrl(character?.url))}
               >
