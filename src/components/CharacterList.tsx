@@ -26,15 +26,15 @@ export const useCharacterList = () => {
     },
   });
 
-  return { status, ...query, error, characters: data?.results || [] };
+  return { status, ...query, error, search, characters: data?.results || [] };
 };
 
 export const CharacterList = () => {
-  const { characters } = useCharacterList();
+  const { characters, search } = useCharacterList();
 
   const [, setSelected] = useSelectedParam();
 
-  if (characters.length === 0) {
+  if (characters.length === 0 || search === '') {
     return <Text>No character found.</Text>;
   }
 
