@@ -17,7 +17,7 @@
     "test:nock-debug-watch": "DEBUG=nock.* jest --config jest.config.js --watch"
   },
   "dependencies": {
-    "@marigold/components": "4.0.0",
+    "@marigold/components": "4.2.2",
     "@marigold/eslint-config": "0.4.4",
     "@marigold/icons": "1.1.7",
     "@marigold/prettier-config": "0.3.0",
