@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@marigold/components": "4.0.0",
-    "@marigold/eslint-config": "0.4.4",
+    "@marigold/eslint-config": "0.4.10",
     "@marigold/icons": "1.1.7",
     "@marigold/prettier-config": "0.3.0",
     "@marigold/system": "4.0.0",
